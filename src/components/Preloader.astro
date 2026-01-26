@@ -1,0 +1,95 @@
+---
+
+---
+
+<div class="preloader-overlay"></div>
+<div class="container">
+  <div class="hero-img">
+    <img src="logo-full.webp" alt="Street Logo" />
+  </div>
+</div>
+
+<style>
+  .preloader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #f7efe6;
+    z-index: 9998;
+    pointer-events: none;
+  }
+
+  .container {
+    position: fixed;
+    top: 120vh;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.2);
+    width: 10vw;
+    min-width: 80px;
+    z-index: 9999;
+  }
+
+  .hero-img img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Prevent scrolling while preloader is active */
+  :global(body.preloader-active) {
+    overflow: hidden;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      width: 20vw;
+      min-width: 100px;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  // Prevent scrolling during preloader
+  document.body.classList.add("preloader-active");
+
+  const tl = gsap.timeline({
+    onComplete: () => {
+      // Remove scroll lock
+      document.body.classList.remove("preloader-active");
+
+      // Fade out only the overlay, keep the logo
+      gsap.to(".preloader-overlay", {
+        duration: 1,
+        opacity: 0,
+        ease: "power2.inOut",
+        onComplete: () => {
+          document.querySelector(".preloader-overlay")?.remove();
+        },
+      });
+
+      // Keep the logo visible and animate it to final position
+      gsap.to(".container", {
+        position: "absolute",
+        duration: 0.01,
+      });
+    },
+  });
+
+  tl.to(".container", {
+    duration: 2,
+    top: "50vh",
+    ease: "expo.inOut",
+    delay: 0.5,
+  });
+
+  tl.to(".container", {
+    duration: 2,
+    scale: 1,
+    top: "25vh",
+    ease: "expo.inOut",
+    delay: 3,
+  });
+</script>

@@ -1,0 +1,540 @@
+---
+
+---
+
+<section id="proyectos" class="proyectos">
+  <div class="proyectos-container">
+    <div class="proyectos-header">
+      <h2 class="section-title">Proyectos</h2>
+      <div class="header-line"></div>
+    </div>
+
+    <div class="projects-pagination">
+      <div class="pagination-line">
+        <div class="pagination-progress"></div>
+      </div>
+      <div class="pagination-numbers">
+        <span class="current">01</span>
+        <span class="separator">/</span>
+        <span class="total">04</span>
+      </div>
+    </div>
+
+    <div class="projects-pin-wrapper">
+      <div class="projects-stack">
+        <!-- Proyecto 1 -->
+        <div class="project-item">
+          <div class="project-info">
+            <span class="project-category">Comercial</span>
+            <h3 class="project-name">Universidad Street</h3>
+            <p class="project-detail">
+              Un desarrollo vanguardista en el corazón de la zona universitaria,
+              redefiniendo el comercio local.
+            </p>
+            <button class="project-cta">Ver más</button>
+          </div>
+          <div class="project-image">
+            <div class="img-placeholder">
+              <span>Imagen del Proyecto</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proyecto 2 -->
+        <div class="project-item">
+          <div class="project-info">
+            <span class="project-category">Comercial</span>
+            <h3 class="project-name">Terrazas Street</h3>
+            <p class="project-detail">
+              Residencias de lujo con amplias terrazas, vistas panorámicas y
+              amenidades de clase mundial.
+            </p>
+            <button class="project-cta">Ver más</button>
+          </div>
+          <div class="project-image">
+            <div class="img-placeholder">
+              <span>Imagen del Proyecto</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proyecto 3 -->
+        <div class="project-item">
+          <div class="project-info">
+            <span class="project-category">Comercial</span>
+            <h3 class="project-name">Sendas Street</h3>
+            <p class="project-detail">
+              El complejo deportivo más exclusivo, diseñado para el alto
+              rendimiento y la comunidad.
+            </p>
+            <button class="project-cta">Ver más</button>
+          </div>
+          <div class="project-image">
+            <div class="img-placeholder">
+              <span>Imagen del Proyecto</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proyecto 4 -->
+        <div class="project-item">
+          <div class="project-info">
+            <span class="project-category">Comercial</span>
+            <h3 class="project-name">Real Street</h3>
+            <p class="project-detail">
+              Gestión integral de espacios corporativos y comerciales de alto
+              nivel.
+            </p>
+            <button class="project-cta">Ver más</button>
+          </div>
+          <div class="project-image">
+            <div class="img-placeholder">
+              <span>Imagen del Proyecto</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="proyectos-footer">
+      <button class="main-cta">Explorar todos los proyectos</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .proyectos {
+    position: relative;
+    width: 100%;
+    background-color: #f7efe6;
+    z-index: 1;
+  }
+
+  .proyectos-container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 10vh 5vw;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    height: 100svh;
+  }
+
+  .proyectos-header {
+    margin-bottom: 4vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: "Monument Extended", sans-serif;
+    font-size: clamp(2rem, 6vw, 8rem);
+    color: #15152a;
+    font-weight: 800;
+    line-height: 0.85;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    letter-spacing: -0.04em;
+  }
+
+  .header-line {
+    width: 0;
+    height: 4px;
+    background-color: #15152a;
+    margin: 0 auto;
+  }
+
+  .projects-pin-wrapper {
+    position: relative;
+    width: 100%;
+    flex-grow: 1;
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .projects-pagination {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 2vh;
+    padding: 0 2vw;
+    flex-shrink: 0;
+  }
+
+  .pagination-line {
+    flex-grow: 1;
+    height: 1px;
+    background: rgba(21, 21, 42, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pagination-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #15152a;
+    transform: scaleX(0.25);
+    transform-origin: left;
+  }
+
+  .pagination-numbers {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 0.8rem;
+    color: #15152a;
+    display: flex;
+    gap: 5px;
+    font-weight: 500;
+  }
+
+  .pagination-numbers .total {
+    opacity: 0.4;
+  }
+
+  .projects-stack {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .project-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5vw;
+    align-items: center;
+    background-color: #f7efe6;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .project-item:first-child {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .project-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .project-category {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #15152a;
+    opacity: 0.6;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-name {
+    font-family: "Monument Extended", sans-serif;
+    font-size: clamp(1.5rem, 3vw, 3.5rem);
+    color: #15152a;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .project-detail {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 0.9rem;
+    color: #15152a;
+    opacity: 0.8;
+    max-width: 400px;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+
+  .project-cta {
+    align-self: flex-start;
+    background: transparent;
+    border: 1px solid #15152a;
+    color: #15152a;
+    padding: 10px 25px;
+    border-radius: 100px;
+    font-family: "Neue Montreal", sans-serif;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+  .project-cta:hover {
+    background: #15152a;
+    color: #f7efe6;
+  }
+
+  .project-image {
+    width: 100%;
+    height: 100%;
+    max-height: 50vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .img-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #e5dcd3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .img-placeholder span {
+    font-family: "Monument Extended", sans-serif;
+    font-size: 0.6rem;
+    opacity: 0.2;
+    text-transform: uppercase;
+  }
+
+  .proyectos-footer {
+    margin-top: 2vh;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .main-cta {
+    background: #15152a;
+    border: none;
+    color: #f7efe6;
+    padding: 15px 35px;
+    border-radius: 100px;
+    font-family: "Monument Extended", sans-serif;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .main-cta:hover {
+    transform: scale(1.05);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 1024px) {
+    .project-item {
+      grid-template-columns: 1fr;
+      gap: 4vh;
+      padding: 3vh 0;
+    }
+    .project-image {
+      height: 35vh;
+      max-height: 350px;
+      order: -1;
+    }
+    .project-name {
+      font-size: 2rem;
+    }
+    .project-detail {
+      max-width: 100%;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .proyectos-container {
+      padding: 8vh 5vw;
+    }
+
+    .proyectos-header {
+      margin-bottom: 4vh;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .projects-pagination {
+      margin-bottom: 3vh;
+      padding: 0;
+    }
+
+    .pagination-numbers {
+      font-size: 0.75rem;
+    }
+
+    .projects-pin-wrapper {
+      flex-grow: 1;
+      min-height: 60vh;
+    }
+
+    .project-item {
+      grid-template-columns: 1fr;
+      gap: 3vh;
+      padding: 0;
+    }
+
+    .project-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .project-image {
+      height: 40vh;
+      max-height: 300px;
+      order: -1;
+    }
+
+    .project-category {
+      font-size: 0.7rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-name {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+
+    .project-detail {
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+      max-width: 100%;
+    }
+
+    .project-cta {
+      padding: 12px 30px;
+      font-size: 0.7rem;
+    }
+
+    .proyectos-footer {
+      margin-top: 3vh;
+    }
+
+    .main-cta {
+      padding: 15px 35px;
+      font-size: 0.75rem;
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+
+  /* Aspect Ratio Adjustments */
+  @media (min-aspect-ratio: 16/10) {
+    .project-image {
+      max-height: 45vh;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const projects = gsap.utils.toArray(".project-item");
+
+  // Initial header animation
+  gsap.from(".proyectos .section-title", {
+    scrollTrigger: {
+      trigger: ".proyectos",
+      start: "top 80%",
+    },
+    y: 50,
+    opacity: 0,
+    duration: 1.2,
+    ease: "power4.out",
+  });
+
+  gsap.to(".proyectos .header-line", {
+    scrollTrigger: {
+      trigger: ".proyectos",
+      start: "top 80%",
+    },
+    width: "100%",
+    duration: 0.8,
+    ease: "power2.inOut",
+  });
+
+  // Pinning and Stacking Animation
+  const totalProjects = projects.length;
+  const progressLine = document.querySelector(".pagination-progress");
+  const currentNum = document.querySelector(".pagination-numbers .current");
+  const totalNum = document.querySelector(".pagination-numbers .total");
+
+  if (totalNum) {
+    totalNum.textContent = totalProjects.toString().padStart(2, "0");
+  }
+
+  const masterTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".proyectos",
+      start: "top top",
+      end: `+=${totalProjects * 100}%`,
+      pin: true,
+      scrub: 1,
+      anticipatePin: 1,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        if (progressLine) gsap.set(progressLine, { scaleX: progress });
+
+        const activeIndex = Math.min(
+          Math.floor(progress * totalProjects),
+          totalProjects - 1,
+        );
+        if (currentNum) {
+          currentNum.textContent = (activeIndex + 1)
+            .toString()
+            .padStart(2, "0");
+        }
+      },
+    },
+  });
+
+  projects.forEach((project: any, i) => {
+    if (i === 0) return;
+
+    masterTl.to(
+      project,
+      {
+        autoAlpha: 1,
+        duration: 1,
+        ease: "power2.inOut",
+      },
+      i,
+    );
+
+    masterTl.fromTo(
+      project.querySelectorAll(".project-name, .project-detail, .project-cta"),
+      {
+        y: 30,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.1,
+        duration: 0.8,
+      },
+      i + 0.2,
+    );
+  });
+
+  masterTl.from(".proyectos-footer", {
+    opacity: 0,
+    y: 20,
+    duration: 0.5,
+  });
+</script>

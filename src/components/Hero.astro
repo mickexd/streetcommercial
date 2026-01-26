@@ -1,0 +1,102 @@
+---
+import Info from "./Info.astro";
+---
+
+<section class="hero">
+  <p class="title">Texto de entrada</p>
+  <Info />
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    font-family: "Monument Extended", sans-serif;
+    font-size: 7vw;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #15152a;
+    overflow: hidden;
+    opacity: 0;
+    z-index: 0;
+    padding: 0 5vw;
+  }
+
+  :global(.title .letter) {
+    display: inline-block;
+    line-height: 1em;
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .title {
+      font-size: 12vw;
+    }
+  }
+
+  /* Aspect ratio adjustments */
+  @media (min-aspect-ratio: 16/10) {
+    .title {
+      font-size: 6.5vw;
+    }
+  }
+
+  @media (min-aspect-ratio: 16/9) {
+    .title {
+      font-size: 7vw;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  const textWrapper = document.querySelector(".title");
+  if (textWrapper && textWrapper.textContent) {
+    textWrapper.innerHTML = textWrapper.textContent.replace(
+      /\S/g,
+      "<span class='letter'>$&</span>",
+    );
+
+    // Wait for preloader animation (starts at 3.5s)
+    setTimeout(() => {
+      const tl = gsap.timeline();
+
+      // First make title visible
+      tl.to(".title", {
+        opacity: 1,
+        duration: 0.01,
+      });
+
+      // Then animate letters in
+      tl.fromTo(
+        ".title .letter",
+        {
+          y: -200,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.5,
+          ease: "expo.out",
+          stagger: 0.05,
+        },
+      );
+    }, 3500);
+  }
+</script>

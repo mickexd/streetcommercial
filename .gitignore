@@ -22,3 +22,12 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# branding
+STREET Manual de Identidad.pdf
+
+#examples
+/examples
+
+#spec files
+/openspec

@@ -1,0 +1,130 @@
+---
+
+---
+
+<div class="info">
+  <p>
+    Expertos en el mercado inmobiliario comercial, brindando soluciones
+    integrales para maximizar el valor de sus propiedades.
+  </p>
+</div>
+
+<div class="buy-now-cta">
+  <button>Contáctanos</button>
+</div>
+
+<div class="prev-imgs">
+  <div class="prev-img prev-1"></div>
+  <div class="prev-img prev-2"></div>
+  <div class="prev-img prev-3"></div>
+</div>
+
+<style>
+  .info {
+    position: absolute;
+    bottom: 5vh;
+    left: 5vw;
+    width: 300px;
+    z-index: 2;
+  }
+
+  .info p {
+    color: #15152a;
+    font-family: "Neue Montreal", sans-serif;
+    text-transform: uppercase;
+    font-size: clamp(10px, 1vw, 12px);
+    line-height: 1.4;
+    opacity: 0.8;
+  }
+
+  .buy-now-cta {
+    position: absolute;
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .buy-now-cta button {
+    background: #15152a;
+    border: none;
+    outline: none;
+    color: #f7efe6;
+    border-radius: 100px;
+    font-family: "Neue Montreal", sans-serif;
+    text-transform: uppercase;
+    padding: 15px 30px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .buy-now-cta button:hover {
+    transform: scale(1.05);
+  }
+
+  .prev-imgs {
+    position: absolute;
+    bottom: 5vh;
+    right: 5vw;
+    display: flex;
+    gap: 10px;
+    z-index: 2;
+  }
+
+  .prev-img {
+    width: 60px;
+    height: 60px;
+    border: 1px solid rgba(21, 21, 42, 0.1);
+    background-size: cover;
+    background-position: center;
+  }
+
+  .prev-1 {
+    background-image: url("/images/prev-1.jpg");
+  }
+  .prev-2 {
+    background-image: url("/images/prev-2.jpg");
+  }
+  .prev-3 {
+    background-image: url("/images/prev-3.jpg");
+  }
+
+  @media (max-width: 768px) {
+    .info {
+      width: 80%;
+      bottom: 20vh;
+      left: 10%;
+      text-align: center;
+    }
+    .prev-imgs {
+      display: none;
+    }
+    .buy-now-cta {
+      bottom: 10vh;
+    }
+  }
+
+  /* Aspect Ratio Adjustments */
+  @media (min-aspect-ratio: 16/10) {
+    .prev-img {
+      width: 80px;
+      height: 80px;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  // Wait for preloader
+  setTimeout(() => {
+    gsap.from(".info, .buy-now-cta, .prev-img", {
+      duration: 1,
+      opacity: 0,
+      y: 20,
+      ease: "power2.out",
+      stagger: 0.1,
+    });
+  }, 4000);
+</script>

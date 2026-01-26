@@ -1,17 +1,78 @@
 ---
-
+import Navbar from "../components/Navbar.astro";
+import Preloader from "../components/Preloader.astro";
+import Hero from "../components/Hero.astro";
+import Nosotros from "../components/Nosotros.astro";
+import Proyectos from "../components/Proyectos.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
 ---
 
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/webp" href="/logo-simple.webp" />
+    <title>STREET | Inmobiliaria Comercial</title>
+  </head>
+  <body>
+    <Navbar />
+    <Preloader />
+    <main>
+      <Hero />
+      <Nosotros />
+      <Proyectos />
+    </main>
+    <Footer />
+  </body>
 </html>
+
+<style is:global>
+  @font-face {
+    font-family: "Monument Extended";
+    src: url("/fonts/MonumentExtended-Regular.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Monument Extended";
+    src: url("/fonts/MonumentExtended-Ultrabold.otf") format("opentype");
+    font-weight: 800;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Neue Montreal";
+    src: url("/fonts/NeueMontreal-Regular.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    width: 100%;
+    min-height: 100vh;
+    background: #f7efe6;
+    color: #15152a;
+    overflow-x: hidden;
+  }
+
+  main {
+    position: relative;
+    width: 100%;
+  }
+
+  /* Ensure sections don't overlap or hide each other */
+  section {
+    position: relative;
+    width: 100%;
+  }
+</style>

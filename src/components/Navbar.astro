@@ -1,0 +1,74 @@
+---
+
+---
+
+<div class="navbar">
+  <div class="site-info">Street</div>
+  <div class="site-menu">
+    <div class="menu-item"><a href="#proyectos">Proyectos</a></div>
+    <div class="menu-item"><a href="#nosotros">Nosotros</a></div>
+    <div class="menu-item">Contacto</div>
+  </div>
+</div>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    padding: 0 5vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Neue Montreal", Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #15152a;
+    z-index: 100;
+    background: transparent;
+  }
+
+  .site-menu {
+    display: flex;
+    gap: 40px;
+  }
+
+  .menu-item a {
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .menu-item a:hover {
+    opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      height: 60px;
+    }
+    .site-menu {
+      gap: 20px;
+    }
+    .menu-item {
+      font-size: 10px;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  // Wait for preloader
+  setTimeout(() => {
+    gsap.from(".navbar", {
+      duration: 1.2,
+      y: -100,
+      opacity: 0,
+      ease: "expo.out",
+    });
+  }, 3800);
+</script>
