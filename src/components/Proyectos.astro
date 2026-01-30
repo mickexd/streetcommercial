@@ -22,82 +22,95 @@
 
     <div class="projects-pin-wrapper">
       <div class="projects-stack">
-        <!-- Proyecto 1 -->
+        <!-- Proyecto 1: Avante Street -->
         <div class="project-item">
           <div class="project-info">
             <span class="project-category">Comercial</span>
-            <h3 class="project-name">Universidad Street</h3>
+            <h3 class="project-name">Avante Street</h3>
             <p class="project-detail">
-              Un desarrollo vanguardista en el corazón de la zona universitaria,
-              redefiniendo el comercio local.
+              Plaza de 3 niveles con drive-thru + roof pádel, diseñada para
+              capturar la demanda real generada por el Hospital Santa María
+              Chapalita.
             </p>
+            <div class="project-meta">
+              <span class="meta-item">51 locales</span>
+              <span class="meta-item">ROI 9-11%</span>
+            </div>
             <button class="project-cta">Ver más</button>
           </div>
           <div class="project-image">
-            <div class="img-placeholder">
-              <span>Imagen del Proyecto</span>
-            </div>
+            <img src="/images/prev-1.jpg" alt="Avante Street" />
+            <div class="image-badge">Preventa</div>
           </div>
         </div>
 
-        <!-- Proyecto 2 -->
+        <!-- Proyecto 2: Nova Street -->
         <div class="project-item">
           <div class="project-info">
             <span class="project-category">Comercial</span>
-            <h3 class="project-name">Terrazas Street</h3>
+            <h3 class="project-name">Nova Street</h3>
             <p class="project-detail">
-              Residencias de lujo con amplias terrazas, vistas panorámicas y
-              amenidades de clase mundial.
+              Plaza 3 niveles pensada para una arteria de paso obligado con
+              terrazas; captura flujo vehicular masivo de +30,000 autos/día.
             </p>
+            <div class="project-meta">
+              <span class="meta-item">42 locales</span>
+              <span class="meta-item">ROI ~10%</span>
+            </div>
             <button class="project-cta">Ver más</button>
           </div>
           <div class="project-image">
-            <div class="img-placeholder">
-              <span>Imagen del Proyecto</span>
-            </div>
+            <img src="/images/prev-2.jpg" alt="Nova Street" />
+            <div class="image-badge">Preventa</div>
           </div>
         </div>
 
-        <!-- Proyecto 3 -->
+        <!-- Proyecto 3: Street Altaluz -->
         <div class="project-item">
           <div class="project-info">
             <span class="project-category">Comercial</span>
-            <h3 class="project-name">Sendas Street</h3>
+            <h3 class="project-name">Street Altaluz</h3>
             <p class="project-detail">
-              El complejo deportivo más exclusivo, diseñado para el alto
-              rendimiento y la comunidad.
+              Plaza operativa con prueba social probada: inquilinos activos y
+              flujo inmediato. OXXO, gimnasio, Samcor y más ya operando.
             </p>
+            <div class="project-meta">
+              <span class="meta-item">14 locales</span>
+              <span class="meta-item">Cashflow día 1</span>
+            </div>
             <button class="project-cta">Ver más</button>
           </div>
           <div class="project-image">
-            <div class="img-placeholder">
-              <span>Imagen del Proyecto</span>
-            </div>
+            <img src="/images/prev-3.jpg" alt="Street Altaluz" />
+            <div class="image-badge active">Operando</div>
           </div>
         </div>
 
-        <!-- Proyecto 4 -->
+        <!-- Proyecto 4: Bosques Street -->
         <div class="project-item">
           <div class="project-info">
-            <span class="project-category">Comercial</span>
-            <h3 class="project-name">Real Street</h3>
+            <span class="project-category">Médico + Comercial</span>
+            <h3 class="project-name">Bosques Street</h3>
             <p class="project-detail">
-              Gestión integral de espacios corporativos y comerciales de alto
-              nivel.
+              Plaza + núcleo médico dirigida a capturar la demanda continua por
+              salud en Capital Norte. 32 locales + 16 unidades médicas.
             </p>
+            <div class="project-meta">
+              <span class="meta-item">48 unidades</span>
+              <span class="meta-item">En construcción</span>
+            </div>
             <button class="project-cta">Ver más</button>
           </div>
           <div class="project-image">
-            <div class="img-placeholder">
-              <span>Imagen del Proyecto</span>
-            </div>
+            <img src="/plazas/real street.jpg" alt="Bosques Street" />
+            <div class="image-badge building">En construcción</div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="proyectos-footer">
-      <button class="main-cta">Explorar todos los proyectos</button>
+      <a href="/proyectos" class="main-cta">Explorar todos los proyectos</a>
     </div>
   </div>
 </section>
@@ -236,10 +249,11 @@
     font-family: "Neue Montreal", sans-serif;
     font-size: 0.7rem;
     text-transform: uppercase;
-    color: #15152a;
-    opacity: 0.6;
+    color: #fcc419;
     display: block;
     margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
   }
 
   .project-name {
@@ -253,12 +267,29 @@
 
   .project-detail {
     font-family: "Neue Montreal", sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #15152a;
     opacity: 0.8;
     max-width: 400px;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .project-meta {
+    display: flex;
+    gap: 1rem;
     margin-bottom: 1.5rem;
-    line-height: 1.4;
+  }
+
+  .meta-item {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.4rem 0.8rem;
+    background: rgba(21, 21, 42, 0.05);
+    color: #15152a;
+    border-radius: 100px;
   }
 
   .project-cta {
@@ -287,22 +318,39 @@
     max-height: 50vh;
     overflow: hidden;
     position: relative;
+    border-radius: 8px;
   }
 
-  .img-placeholder {
+  .project-image img {
     width: 100%;
     height: 100%;
-    background-color: #e5dcd3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    object-fit: cover;
+    display: block;
   }
 
-  .img-placeholder span {
-    font-family: "Monument Extended", sans-serif;
-    font-size: 0.6rem;
-    opacity: 0.2;
+  .image-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 0.65rem;
     text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.5rem 1rem;
+    background: #fcc419;
+    color: #15152a;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+
+  .image-badge.active {
+    background: #4caf50;
+    color: white;
+  }
+
+  .image-badge.building {
+    background: #2196f3;
+    color: white;
   }
 
   .proyectos-footer {
@@ -312,6 +360,7 @@
   }
 
   .main-cta {
+    display: inline-block;
     background: #15152a;
     border: none;
     color: #f7efe6;
@@ -322,10 +371,13 @@
     font-size: 0.75rem;
     cursor: pointer;
     transition: transform 0.3s ease;
+    text-decoration: none;
   }
 
   .main-cta:hover {
     transform: scale(1.05);
+    background: #fcc419;
+    color: #15152a;
   }
 
   /* Responsive Adjustments */
@@ -408,9 +460,13 @@
 
     .project-detail {
       font-size: 0.85rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       line-height: 1.5;
       max-width: 100%;
+    }
+
+    .project-meta {
+      margin-bottom: 1.5rem;
     }
 
     .project-cta {
@@ -517,7 +573,9 @@
     );
 
     masterTl.fromTo(
-      project.querySelectorAll(".project-name, .project-detail, .project-cta"),
+      project.querySelectorAll(
+        ".project-name, .project-detail, .project-cta, .project-meta",
+      ),
       {
         y: 30,
         opacity: 0,

@@ -10,54 +10,58 @@
     </div>
 
     <div class="services-grid">
+      <!-- Street Comercial -->
       <div class="service-card" data-service="comercial">
         <div class="service-bg"></div>
         <div class="service-content">
           <span class="service-number">01</span>
-          <h3 class="service-title">Comercial</h3>
+          <h3 class="service-title">Street Comercial</h3>
           <ul class="service-list">
-            <li>Estrategias</li>
-            <li>Maximización</li>
-            <li>Propiedades</li>
+            <li>Plazas comerciales</li>
+            <li>Retail</li>
+            <li>Desarrollo</li>
           </ul>
         </div>
       </div>
 
-      <div class="service-card" data-service="administracion">
+      <!-- Street Operadora -->
+      <div class="service-card" data-service="operadora">
         <div class="service-bg"></div>
         <div class="service-content">
           <span class="service-number">02</span>
-          <h3 class="service-title">Administración</h3>
+          <h3 class="service-title">Street Operadora</h3>
           <ul class="service-list">
-            <li>Gestión</li>
-            <li>Rentabilidad</li>
+            <li>Gestión integral</li>
             <li>Mantenimiento</li>
+            <li>Administración</li>
           </ul>
         </div>
       </div>
 
+      <!-- Street Living -->
       <div class="service-card" data-service="living">
         <div class="service-bg"></div>
         <div class="service-content">
           <span class="service-number">03</span>
-          <h3 class="service-title">Living</h3>
+          <h3 class="service-title">Street Living</h3>
           <ul class="service-list">
-            <li>Residencial</li>
-            <li>Alta Gama</li>
-            <li>Sofisticación</li>
+            <li>Desarrollo residencial</li>
+            <li>Proyectos verticales</li>
+            <li>Próximamente</li>
           </ul>
         </div>
       </div>
 
-      <div class="service-card" data-service="paddel">
+      <!-- Padel Street -->
+      <div class="service-card" data-service="padel">
         <div class="service-bg"></div>
         <div class="service-content">
           <span class="service-number">04</span>
-          <h3 class="service-title">Paddel</h3>
+          <h3 class="service-title">Padel Street</h3>
           <ul class="service-list">
-            <li>Deportivo</li>
-            <li>Desarrollo</li>
-            <li>Comercialización</li>
+            <li>Instalaciones de pádel</li>
+            <li>Eventos deportivos</li>
+            <li>Operación en plazas</li>
           </ul>
         </div>
       </div>
@@ -69,6 +73,213 @@
   </div>
 </section>
 
+<!-- Modal Overlay - Outside section to avoid z-index issues -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-backdrop"></div>
+  <div class="modal-container">
+    <button class="modal-close" aria-label="Cerrar">
+      <span></span>
+      <span></span>
+    </button>
+    <div class="modal-content">
+      <div class="modal-body"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Service Data Templates -->
+<template id="service-data-comercial">
+  <span class="modal-number">01</span>
+  <h4 class="modal-title">Street Comercial</h4>
+  <p class="modal-summary">
+    Desarrollo y operación de plazas comerciales estratégicamente ubicadas para
+    maximizar el valor del retail y la experiencia del cliente.
+  </p>
+
+  <div class="modal-section">
+    <h5>Nuestras Plazas</h5>
+    <ul>
+      <li><strong>Capital Street</strong> — Operativa y con caso de éxito</li>
+      <li><strong>Sendas Street</strong> — Apertura febrero 2026</li>
+      <li><strong>Avante Street</strong> — 2027</li>
+      <li><strong>Terrazas Street</strong> — En desarrollo</li>
+      <li><strong>Real Street</strong> — En desarrollo</li>
+      <li><strong>Universidad Street</strong> — En desarrollo</li>
+    </ul>
+  </div>
+
+  <div class="modal-section">
+    <h5>Propuesta de Valor</h5>
+    <ul>
+      <li>Ubicaciones estratégicas con alta afluencia peatonal</li>
+      <li>Mix de tenants curado para complementar la oferta</li>
+      <li>Integración con servicios de Padel Street y Street Living</li>
+      <li>Gestión profesional mediante Street Operadora</li>
+    </ul>
+  </div>
+</template>
+
+<template id="service-data-operadora">
+  <span class="modal-number">02</span>
+  <h4 class="modal-title">Street Operadora</h4>
+  <p class="modal-summary">
+    Unidad operativa que administra las plazas Street: gestión integral de
+    operación, mantenimiento y limpieza para preservar valor de activos y
+    experiencia del usuario.
+  </p>
+
+  <div class="modal-section">
+    <h5>Servicios (tácticos / operativos)</h5>
+    <ul>
+      <li>Atención a arrendatarios y arrendadores</li>
+      <li>
+        Protocolos de limpieza diaria y mantenimiento preventivo/correctivo de
+        instalaciones comunes
+      </li>
+      <li>
+        Reglamentos y prácticas para una mejor convivencia entre inquilinos
+        (tipo de banderolas, letreros, etc)
+      </li>
+      <li>
+        Coordinación de proveedores, control de accesos y mantenimiento de
+        jardines/áreas comunes
+      </li>
+      <li>
+        Reportes periódicos de ocupación, incidencias, consumos (agua/luz), y
+        seguimiento de tickets de mantenimiento (formatos a definir)
+      </li>
+    </ul>
+  </div>
+
+  <div class="modal-section">
+    <h5>Beneficio operativo</h5>
+    <ul>
+      <li>
+        Mantener niveles de servicio homogéneos entre plazas para proteger la
+        plusvalía y asegurar la experiencia habitual del cliente/residente
+      </li>
+      <li>
+        Entrega operativa lista para que inversores y arrendatarios perciban
+        continuidad y manejo profesional del activo
+      </li>
+    </ul>
+  </div>
+</template>
+
+<template id="service-data-living">
+  <span class="modal-number">03</span>
+  <h4 class="modal-title">Street Living</h4>
+  <p class="modal-subtitle">Próximamente</p>
+  <p class="modal-summary">
+    Línea de desarrollo residencial de Street: proyectos verticales orientados a
+    demanda local y captación de mercado para alimentar la oferta de plazas y
+    servicios.
+  </p>
+
+  <div class="modal-section">
+    <h5>Proyectos</h5>
+    <div class="modal-project">
+      <span class="project-tag">Marzo 2026</span>
+      <p>
+        <strong>Aguascalientes:</strong> lanzamiento próximo de 4 torres de departamentos
+        + plaza comercial de 50 locales de 2 plantas. (primero iniciamos obra con
+        plaza al 85% vendida 1era torre, al 85% 2nda torre y así)
+      </p>
+    </div>
+    <div class="modal-project">
+      <span class="project-tag">Q3-Q4 2026</span>
+      <p>
+        <strong>Chapala:</strong> 10 casas, base 4 diferentes prototipos dentro de
+        fraccionamiento florentina — <a
+          href="https://florentinaresidencial.mx/"
+          target="_blank"
+          rel="noopener noreferrer">florentinaresidencial.mx</a
+        > — 6-8 MDP ticket
+      </p>
+    </div>
+  </div>
+
+  <div class="modal-section">
+    <h5>Propuesta de valor</h5>
+    <ul>
+      <li>
+        Diseño enfocado a residentes que demandan servicios y cercanía a plazas
+        Street
+      </li>
+      <li>
+        Sinergia directa con Street Comercial: fuentes de demanda ancla para
+        comercios y servicios esenciales
+      </li>
+    </ul>
+  </div>
+
+  <div class="modal-section">
+    <h5>Operativo clave</h5>
+    <ul>
+      <li>Entrega por fases para alimentar preventa de locales comerciales</li>
+      <li>
+        Coordinar con Street Operadora incorporación de servicios comunes
+        (mantenimiento, limpieza, seguridad) para garantizar experiencia
+        residencial y con toque innovador ya que Ags se planea un sistema con
+        app para accesos
+      </li>
+    </ul>
+  </div>
+</template>
+
+<template id="service-data-padel">
+  <span class="modal-number">04</span>
+  <h4 class="modal-title">Padel Street</h4>
+  <p class="modal-summary">
+    Cadena de instalaciones y eventos de pádel integrada al portafolio Street:
+    operación en plazas y club independiente para generar tráfico, permanencia y
+    renta.
+  </p>
+
+  <div class="modal-section">
+    <h5>Posicionamiento</h5>
+    <p>
+      Pádel como ancla y motor de permanencia: instalaciones integradas en
+      plazas con roof/azotea y un club de más de 5 canchas + bar en el roof de
+      una plaza en Zapopan (2027).
+    </p>
+  </div>
+
+  <div class="modal-section">
+    <h5>Presencia y Roadmap</h5>
+    <ul>
+      <li>
+        <strong>Operando:</strong> Capital Street (plaza operativa y con caso de éxito)
+      </li>
+      <li>
+        <strong>Próximo mes:</strong> Sendas Street (apertura/operación en febrero
+        2026)
+      </li>
+      <li>
+        <strong>2027:</strong> Avante Street (roof con cancha de pádel) y Club de
+        pádel en Zona real zapopan (5 canchas + bar en roof)
+      </li>
+      <li>
+        <strong>Medición:</strong> reservas por whatsapp, ocupación por franja horaria
+      </li>
+    </ul>
+  </div>
+
+  <div class="modal-section">
+    <h5>Beneficio para desarrolladores / retail</h5>
+    <ul>
+      <li>
+        Aumenta tiempo de permanencia y frecuencia de visita, mejorando KPI de
+        flujo para giros F&B y servicios
+      </li>
+      <li>
+        Producto diferenciador para ventas y renta de locales (valor añadido en
+        pitch comercial)
+      </li>
+    </ul>
+  </div>
+</template>
+
 <style>
   .nosotros {
     position: relative;
@@ -79,7 +290,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow: visible;
     z-index: 1;
   }
 
@@ -142,13 +353,13 @@
     transform: translateY(100px);
   }
 
-  .service-card[data-service="administracion"] {
+  .service-card[data-service="living"] {
     background-color: #f0e6db;
   }
-  .service-card[data-service="living"] {
+  .service-card[data-service="operadora"] {
     background-color: #e9ddd0;
   }
-  .service-card[data-service="paddel"] {
+  .service-card[data-service="comercial"] {
     background-color: #e2d4c5;
   }
 
@@ -165,7 +376,8 @@
     z-index: 1;
   }
 
-  .service-card:hover .service-bg {
+  .service-card:hover .service-bg,
+  .service-card.active .service-bg {
     transform: scaleY(1);
   }
 
@@ -184,6 +396,7 @@
     font-weight: 500;
     margin-bottom: 20px;
     display: block;
+    transition: color 0.4s ease;
   }
 
   .service-title {
@@ -195,6 +408,7 @@
     margin-bottom: 30px;
     line-height: 1;
     letter-spacing: -0.02em;
+    transition: color 0.4s ease;
   }
 
   .service-list {
@@ -212,13 +426,267 @@
     letter-spacing: 0.05em;
     opacity: 0.8;
     font-weight: 500;
+    transition:
+      color 0.4s ease,
+      opacity 0.4s ease;
   }
 
   .service-card:hover .service-number,
   .service-card:hover .service-title,
-  .service-card:hover .service-list li {
-    color: #f7efe6 !important;
+  .service-card:hover .service-list li,
+  .service-card.active .service-number,
+  .service-card.active .service-title,
+  .service-card.active .service-list li {
+    color: #f7efe6;
     opacity: 1;
+  }
+
+  /* Modal Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.4s ease,
+      visibility 0.4s ease;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(21, 21, 42, 0.85);
+    backdrop-filter: blur(8px);
+  }
+
+  .modal-container {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    background-color: #f7efe6;
+    z-index: 100001;
+    transform: translateY(30px) scale(0.95);
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    overflow: hidden;
+  }
+
+  .modal-overlay.active .modal-container {
+    transform: translateY(0) scale(1);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    background-color: #15152a;
+    border: none;
+    cursor: pointer;
+    z-index: 100002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition:
+      background-color 0.3s ease,
+      transform 0.3s ease;
+  }
+
+  .modal-close:hover {
+    background-color: #2a2a4a;
+    transform: rotate(90deg);
+  }
+
+  .modal-close span {
+    position: absolute;
+    width: 20px;
+    height: 2px;
+    background-color: #f7efe6;
+  }
+
+  .modal-close span:first-child {
+    transform: rotate(45deg);
+  }
+
+  .modal-close span:last-child {
+    transform: rotate(-45deg);
+  }
+
+  .modal-content {
+    max-height: 85vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #15152a #f0e6db;
+  }
+
+  .modal-content::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .modal-content::-webkit-scrollbar-track {
+    background: #f0e6db;
+  }
+
+  .modal-content::-webkit-scrollbar-thumb {
+    background: #15152a;
+  }
+
+  .modal-body {
+    padding: 50px 40px 40px;
+  }
+
+  .modal-number {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 0.85rem;
+    color: #15152a;
+    opacity: 0.5;
+    margin-bottom: 10px;
+    display: block;
+    letter-spacing: 0.1em;
+  }
+
+  .modal-title {
+    font-family: "Monument Extended", sans-serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: #15152a;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .modal-subtitle {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 0.9rem;
+    color: #15152a;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+
+  .modal-summary {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 1.05rem;
+    color: #15152a;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    padding-bottom: 25px;
+    border-bottom: 2px solid rgba(21, 21, 42, 0.1);
+    font-style: italic;
+  }
+
+  .modal-section {
+    margin-bottom: 28px;
+  }
+
+  .modal-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .modal-section h5 {
+    font-family: "Monument Extended", sans-serif;
+    font-size: 0.85rem;
+    color: #15152a;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .modal-section p {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 0.95rem;
+    color: #15152a;
+    line-height: 1.65;
+    opacity: 0.85;
+    margin-bottom: 10px;
+  }
+
+  .modal-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .modal-section li {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 0.95rem;
+    color: #15152a;
+    line-height: 1.65;
+    opacity: 0.85;
+    margin-bottom: 10px;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .modal-section li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    opacity: 0.5;
+  }
+
+  .modal-section li:last-child {
+    margin-bottom: 0;
+  }
+
+  .modal-section a {
+    color: #15152a;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal-section a:hover {
+    opacity: 0.7;
+  }
+
+  .modal-project {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(21, 21, 42, 0.1);
+  }
+
+  .modal-project:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .project-tag {
+    display: inline-block;
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 0.7rem;
+    color: #f7efe6;
+    background-color: #15152a;
+    padding: 4px 10px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  .modal-project p {
+    margin: 0;
   }
 
   .nosotros-footer {
@@ -299,6 +767,22 @@
       line-height: 1.4;
       padding: 0 10px;
     }
+
+    .modal-container {
+      width: 95%;
+      max-height: 90vh;
+    }
+
+    .modal-body {
+      padding: 50px 25px 30px;
+    }
+
+    .modal-close {
+      top: 15px;
+      right: 15px;
+      width: 40px;
+      height: 40px;
+    }
   }
 
   /* Aspect Ratio Adjustments */
@@ -315,6 +799,7 @@
 
   gsap.registerPlugin(ScrollTrigger);
 
+  // GSAP Animations
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: ".nosotros",
@@ -358,4 +843,89 @@
       },
       "-=0.4",
     );
+
+  // Modal Logic
+  const serviceCards = document.querySelectorAll(".service-card");
+  const modalOverlay = document.getElementById("modal-overlay");
+  const modalBody = document.querySelector(".modal-body");
+  const modalClose = document.querySelector(".modal-close");
+  const modalBackdrop = document.querySelector(".modal-backdrop");
+
+  let hoverTimeout: ReturnType<typeof setTimeout> | null = null;
+  let isModalOpen = false;
+  let preloaderComplete = false;
+
+  // Listen for preloader completion
+  window.addEventListener("preloaderComplete", () => {
+    preloaderComplete = true;
+  });
+
+  // Check if preloader already completed (in case event was fired before listener added)
+  if (!document.body.classList.contains("preloader-active")) {
+    preloaderComplete = true;
+  }
+
+  const openModal = (serviceType: string) => {
+    // Don't open modal if preloader is still active
+    if (!preloaderComplete) return;
+
+    const templateId = `service-data-${serviceType}`;
+    const template = document.getElementById(
+      templateId,
+    ) as HTMLTemplateElement | null;
+
+    if (template && modalBody) {
+      modalBody.innerHTML = "";
+      modalBody.appendChild(template.content.cloneNode(true));
+      modalOverlay?.classList.add("active");
+      document.body.style.overflow = "hidden";
+      isModalOpen = true;
+    }
+  };
+
+  const closeModal = () => {
+    modalOverlay?.classList.remove("active");
+    document.body.style.overflow = "";
+    isModalOpen = false;
+  };
+
+  // Detect touch device
+  const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+
+  serviceCards.forEach((card) => {
+    const serviceType = card.getAttribute("data-service");
+    if (!serviceType) return;
+
+    if (isTouchDevice) {
+      // Mobile: Click to open
+      card.addEventListener("click", () => {
+        openModal(serviceType);
+      });
+    } else {
+      // Desktop: Hover with delay
+      card.addEventListener("mouseenter", () => {
+        hoverTimeout = setTimeout(() => {
+          openModal(serviceType);
+        }, 400);
+      });
+
+      card.addEventListener("mouseleave", () => {
+        if (hoverTimeout) {
+          clearTimeout(hoverTimeout);
+          hoverTimeout = null;
+        }
+      });
+    }
+  });
+
+  // Close modal events
+  modalClose?.addEventListener("click", closeModal);
+  modalBackdrop?.addEventListener("click", closeModal);
+
+  // Close on escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isModalOpen) {
+      closeModal();
+    }
+  });
 </script>
