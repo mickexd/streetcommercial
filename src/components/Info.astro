@@ -11,7 +11,7 @@
 </div>
 
 <div class="buy-now-cta">
-  <button>Contáctanos</button>
+  <button id="hero-contact-trigger">Invertir</button>
 </div>
 
 <div class="prev-imgs">
@@ -82,13 +82,13 @@
   }
 
   .prev-1 {
-    background-image: url("/images/prev-1.jpg");
+    background-image: url("/images/prev-1.webp");
   }
   .prev-2 {
-    background-image: url("/images/prev-2.jpg");
+    background-image: url("/images/prev-2.webp");
   }
   .prev-3 {
-    background-image: url("/images/prev-3.jpg");
+    background-image: url("/images/prev-3.webp");
   }
 
   @media (max-width: 768px) {
@@ -120,6 +120,12 @@
 
   // Wait for preloader
   setTimeout(() => {
+    const heroContactTrigger = document.getElementById("hero-contact-trigger");
+
+    heroContactTrigger?.addEventListener("click", () => {
+      document.dispatchEvent(new CustomEvent("open-contact-modal"));
+    });
+
     gsap.from(".info, .buy-now-cta, .prev-img", {
       duration: 1,
       opacity: 0,

@@ -5,6 +5,7 @@ import "../styles/global.css";
 
 interface Project {
   id: string;
+  slug: string;
   name: string;
   category: string;
   location: string;
@@ -20,6 +21,7 @@ interface Project {
 const projects: Project[] = [
   {
     id: "avante",
+    slug: "avante-street",
     name: "Avante Street",
     category: "Comercial",
     location: "Capital Norte, Zapopan",
@@ -31,13 +33,14 @@ const projects: Project[] = [
       "Plaza de 3 niveles con drive-thru + roof pádel, diseñada para capturar la demanda real generada por el Hospital Santa María Chapalita.",
     usp: [
       "Drive-thru como atractor de tráfico",
-      "Roof con cancha de pádel",
+      "Roof with cancha de pádel",
       "Demanda >5,000 personas/día",
     ],
-    image: "/plazas/avante-street.jpg",
+    image: "/plazas/Avante Street/main.webp",
   },
   {
     id: "nova",
+    slug: "nova-street",
     name: "Nova Street",
     category: "Comercial",
     location: "Zona Norte ZMG",
@@ -52,28 +55,29 @@ const projects: Project[] = [
       "Diseño con terrazas premium",
       "Frente a Cruz Verde Niña Eva",
     ],
-    image: "/plazas/nova-street.jpg",
+    image: "/plazas/Nova Street/main.webp",
   },
   {
-    id: "altaluz",
-    name: "Street Altaluz",
+    id: "albaterra",
+    slug: "albaterra-street",
+    name: "Albaterra Street",
     category: "Comercial",
-    location: "Carr. Colotlán",
-    status: "Operando",
-    units: "14 locales",
-    priceRange: "Consultar",
-    roi: "Cashflow desde día 1",
-    pitch:
-      "Plaza operativa con prueba social probada: inquilinos activos y flujo inmediato.",
+    location: "Zapopan",
+    status: "En desarrollo",
+    units: "Por definir",
+    priceRange: "Próximamente",
+    roi: "En evaluación",
+    pitch: "Nuevo desarrollo Street en zona estratégica.",
     usp: [
-      "OXXO, gimnasio, Samcor activos",
-      "Contratos vigentes demostrables",
-      "Cluster con Nova Street (500m)",
+      "Ubicación privilegiada",
+      "Desarrollo en planificación",
+      "Más información próximamente",
     ],
-    image: "/plazas/altaluz-street.jpg",
+    image: "/plazas/Albaterra Street/main.webp",
   },
   {
     id: "bosques",
+    slug: "bosques-street",
     name: "Bosques Street",
     category: "Médico + Comercial",
     location: "Capital Norte, Zapopan",
@@ -88,10 +92,11 @@ const projects: Project[] = [
       "Consultorios con patio",
       "Cercanía Hospital Santa María",
     ],
-    image: "/plazas/bosques-street.jpg",
+    image: "/plazas/Bosques Street/main.webp",
   },
   {
     id: "sendas",
+    slug: "sendas-street",
     name: "Sendas Street",
     category: "Vecinal",
     location: "Tlajomulco, Senderos de Monteverde",
@@ -105,10 +110,11 @@ const projects: Project[] = [
       "Cancha de pádel en roof",
       "Única plaza formal en la zona",
     ],
-    image: "/plazas/sendas street.jpg",
+    image: "/plazas/Sendas Street/main.webp",
   },
   {
     id: "real",
+    slug: "real-street",
     name: "Real Street",
     category: "Cercanía",
     location: "Zapopan Norte, Campo Real",
@@ -119,13 +125,14 @@ const projects: Project[] = [
     pitch: "Plaza de cercanía con entrada/salida obligada del fraccionamiento.",
     usp: [
       "Tráfico garantizado por hábito",
-      "Roof con potencial premium",
+      "Roof with potencial premium",
       "Solo 2 locales disponibles",
     ],
-    image: "/plazas/real street.jpg",
+    image: "/plazas/Real street/main.webp",
   },
   {
     id: "terrazas",
+    slug: "las-terrazas-street",
     name: "Las Terrazas Street",
     category: "Comercial",
     location: "Tlaquepaque",
@@ -134,16 +141,17 @@ const projects: Project[] = [
     priceRange: "100% vendida",
     roi: "Track record probado",
     pitch:
-      "Primera plaza Street, 100% vendida y caso operativo para validar modelo.",
+      "Primera plaza Street, 100% vendida and caso operativo para validar modelo.",
     usp: [
       "Primer activo Street entregado",
       "Evidencia de ejecución",
       "Data operativa disponible",
     ],
-    image: "/plazas/terrazas street.jpg",
+    image: "/plazas/Terrazas street/main.webp",
   },
   {
     id: "universitaria",
+    slug: "street-universitaria",
     name: "Street Universitaria",
     category: "Comercial",
     location: "Tlaquepaque, zona ITESO",
@@ -158,10 +166,11 @@ const projects: Project[] = [
       "Conectividad con ITESO",
       "100% rentada",
     ],
-    image: "/plazas/univerdad street.jpg",
+    image: "/plazas/Universidad Street/main.webp",
   },
   {
     id: "capital",
+    slug: "capital-street",
     name: "Capital Street",
     category: "Comercial",
     location: "Capital Norte",
@@ -176,10 +185,11 @@ const projects: Project[] = [
       "Benchmark para nuevos proyectos",
       "Cercanía con Avante y Bosques",
     ],
-    image: "/plazas/capital-street.jpg",
+    image: "/plazas/Capital Street/main.webp",
   },
   {
     id: "elarc",
+    slug: "elarc-street",
     name: "Elarc Street",
     category: "Mixto",
     location: "Zona Poniente, Parque Metropolitano",
@@ -194,10 +204,11 @@ const projects: Project[] = [
       "Zona Poniente emergente",
       "Modelo mixto innovador",
     ],
-    image: "/plazas/elarc-street.jpg",
+    image: "/plazas/Bosques Street/plaza-1.webp",
   },
   {
     id: "zimalta",
+    slug: "zimalta-street",
     name: "Zimaltá Street",
     category: "Comercial",
     location: "Próximamente",
@@ -211,7 +222,7 @@ const projects: Project[] = [
       "En desarrollo",
       "Más información próximamente",
     ],
-    image: "/plazas/zimalta-street.jpg",
+    image: "/plazas/Nova Street/plaza-1.webp",
   },
 ];
 ---
@@ -245,8 +256,8 @@ const projects: Project[] = [
         </div>
         <div class="hero-stats">
           <div class="stat-item">
-            <span class="stat-number">11</span>
-            <span class="stat-label">Proyectos</span>
+            <span class="stat-number">9</span>
+            <span class="stat-label">Proyectos Activos</span>
           </div>
           <div class="stat-item">
             <span class="stat-number">250+</span>
@@ -374,7 +385,7 @@ const projects: Project[] = [
                         <img
                           src={project.image}
                           alt={project.name}
-                          onerror="this.src='/images/prev-1.jpg'"
+                          onerror="this.src='/images/prev-1.webp'"
                         />
                         <div class="image-overlay" />
                       </div>
@@ -438,7 +449,10 @@ const projects: Project[] = [
                         </ul>
                       </div>
 
-                      <button class="preview-cta">
+                      <a
+                        href={`/proyectos/${project.slug}`}
+                        class="preview-cta"
+                      >
                         <span>Ver detalles completos</span>
                         <svg
                           width="20"
@@ -454,7 +468,7 @@ const projects: Project[] = [
                             stroke-linejoin="round"
                           />
                         </svg>
-                      </button>
+                      </a>
                     </div>
                   </div>
                 ))
@@ -480,12 +494,12 @@ const projects: Project[] = [
                 <div class="preview-info placeholder-info">
                   <div class="placeholder-stats">
                     <div class="ph-stat">
-                      <span class="ph-number">11</span>
-                      <span class="ph-label">Proyectos activos</span>
+                      <span class="ph-number">9</span>
+                      <span class="ph-label">Proyectos con imágenes</span>
                     </div>
                     <div class="ph-stat">
-                      <span class="ph-number">6</span>
-                      <span class="ph-label">En preventa</span>
+                      <span class="ph-number">2</span>
+                      <span class="ph-label">En planeación</span>
                     </div>
                     <div class="ph-stat">
                       <span class="ph-number">4</span>
@@ -1054,6 +1068,7 @@ const projects: Project[] = [
     justify-content: center;
     gap: 0.75rem;
     transition: all 0.3s var(--transition-smooth);
+    text-decoration: none;
   }
 
   .preview-cta:hover {

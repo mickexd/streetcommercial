@@ -6,16 +6,208 @@ import Nosotros from "../components/Nosotros.astro";
 import Proyectos from "../components/Proyectos.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+
+const siteUrl = "https://streetmx.com";
+const pageTitle = "STREET | Inmobiliaria Comercial - Inversión en Plazas Comerciales ZMG";
+const pageDescription = "Inmobiliaria comercial líder en Guadalajara ZMG. Inversión en plazas comerciales con cap rate del 9-12% anual + plusvalía. 11 plazas en operación: Capital Street, Sendas Street, Avante Street. Locales comerciales en preventa y renta.";
+const keywords = "inmobiliaria comercial Guadalajara, inversion plazas comerciales, locales comerciales venta ZMG, cap rate 9-12%, plusvalia inmuebles, Capital Street, Sendas Street, Avante Street, inversión patrimonial, retail Mexico, plazas comerciales Jalisco";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es-MX">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title>{pageTitle}</title>
+    <meta name="title" content={pageTitle} />
+    <meta name="description" content={pageDescription} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="STREET Inteligencia Comercial" />
+    <meta name="copyright" content="© 2026 STREET Inteligencia Comercial. Todos los derechos reservados." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={siteUrl} />
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/webp" href="/logo-simple.webp" />
-    <title>STREET | Inmobiliaria Comercial</title>
+    <link rel="apple-touch-icon" href="/logo-simple.webp" />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#15152a" />
+    <meta name="msapplication-TileColor" content="#15152a" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={`${siteUrl}/logo-horizontal.webp`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="STREET Inteligencia Comercial - Inmobiliaria en Guadalajara" />
+    <meta property="og:site_name" content="STREET Inteligencia Comercial" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:locale:alternate" content="es_ES" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={siteUrl} />
+    <meta property="twitter:title" content={pageTitle} />
+    <meta property="twitter:description" content={pageDescription} />
+    <meta property="twitter:image" content={`${siteUrl}/logo-horizontal.webp`} />
+    <meta property="twitter:image:alt" content="STREET Inteligencia Comercial - Inmobiliaria en Guadalajara" />
+    
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="MX-JAL" />
+    <meta name="geo.placename" content="Guadalajara, Zapopan, Jalisco" />
+    <meta name="geo.position" content="20.6767;-103.3475" />
+    <meta name="ICBM" content="20.6767, -103.3475" />
+    
+    <!-- Mobile App Capable -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="STREET" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!-- Structured Data - LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      "name": "STREET Inteligencia Comercial",
+      "alternateName": "STREET Inmobiliaria Comercial",
+      "description": "Inmobiliaria comercial líder en Guadalajara ZMG especializada en desarrollo y operación de plazas comerciales con retorno de inversión del 9-12% anual.",
+      "url": "https://streetmx.com",
+      "logo": "https://streetmx.com/logo-horizontal.webp",
+      "image": "https://streetmx.com/logo-horizontal.webp",
+      "telephone": "+52-332-581-3250",
+      "email": "hola@streetmx.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Guadalajara",
+        "addressRegion": "Jalisco",
+        "addressCountry": "MX"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "20.6767",
+        "longitude": "-103.3475"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Zona Metropolitana de Guadalajara",
+        "containedInPlace": {
+          "@type": "State",
+          "name": "Jalisco"
+        }
+      },
+      "priceRange": "$$$$",
+      "currenciesAccepted": "MXN",
+      "paymentAccepted": "Efectivo, Transferencia, Crédito hipotecario",
+      "openingHours": "Mo-Fr 09:00-18:00",
+      "sameAs": [
+        "https://www.instagram.com/streetinteligenciacomercial/",
+        "https://www.facebook.com/streetinteligenciacomercial",
+        "https://wa.me/523325813250"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Plazas Comerciales",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "BusinessAudience",
+              "audienceType": "Inversión en plazas comerciales"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "BusinessAudience",
+              "audienceType": "Locales comerciales en venta"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "BusinessAudience",
+              "audienceType": "Desarrollo inmobiliario comercial"
+            }
+          }
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "150"
+      }
+    }
+    </script>
+    
+    <!-- Structured Data - WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "STREET Inteligencia Comercial",
+      "url": "https://streetmx.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://streetmx.com/proyectos?search={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <!-- Structured Data - Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "STREET Inteligencia Comercial",
+      "alternateName": "Grupo STREET",
+      "url": "https://streetmx.com",
+      "logo": "https://streetmx.com/logo-horizontal.webp",
+      "foundingDate": "2018",
+      "description": "Grupo inmobiliario especializado en desarrollo, operación e inversión de plazas comerciales en la Zona Metropolitana de Guadalajara.",
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "value": "50-100"
+      },
+      "sameAs": [
+        "https://www.instagram.com/streetinteligenciacomercial/",
+        "https://www.facebook.com/streetinteligenciacomercial",
+        "https://wa.me/523325813250"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+52-332-581-3250",
+        "contactType": "Ventas",
+        "email": "hola@streetmx.com",
+        "areaServed": "MX",
+        "availableLanguage": ["Spanish"]
+      }
+    }
+    </script>
+    
+    <!-- Preconnect to External Domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Language Alternates -->
+    <link rel="alternate" hreflang="es-MX" href={siteUrl} />
+    <link rel="alternate" hreflang="es" href={siteUrl} />
+    <link rel="alternate" hreflang="x-default" href={siteUrl} />
   </head>
   <body>
     <Navbar />

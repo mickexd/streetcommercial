@@ -22,6 +22,15 @@ import Info from "./Info.astro";
     z-index: 1;
   }
 
+  .hero.hovering-images .title {
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .hero.hovering-images :global(.info p) {
+    color: #ffffff;
+  }
+
   .hero-bg {
     position: absolute;
     top: 0;
@@ -199,20 +208,34 @@ import Info from "./Info.astro";
   const heroBg = document.querySelector(".hero-bg") as HTMLDivElement | null;
   const prevImages = document.querySelectorAll(".prev-img");
   const imageUrls = [
-    "/images/prev-1.jpg",
-    "/images/prev-2.jpg",
-    "/images/prev-3.jpg",
+    "/images/prev-1.webp",
+    "/images/prev-2.webp",
+    "/images/prev-3.webp",
   ];
 
-  if (heroBg) {
+  const heroSection = document.querySelector(".hero") as HTMLDivElement | null;
+
+  if (heroBg && heroSection) {
+    const heroLogo = document.querySelector(
+      ".hero-img img",
+    ) as HTMLImageElement | null;
+
     prevImages.forEach((prevImg, index) => {
       prevImg.addEventListener("mouseenter", () => {
         heroBg.style.backgroundImage = `url("${imageUrls[index]}")`;
         heroBg.classList.add("active");
+        heroSection.classList.add("hovering-images");
+        if (heroLogo) {
+          heroLogo.src = "/logo-full-blanco.webp";
+        }
       });
 
       prevImg.addEventListener("mouseleave", () => {
         heroBg.classList.remove("active");
+        heroSection.classList.remove("hovering-images");
+        if (heroLogo) {
+          heroLogo.src = "/logo-full.webp";
+        }
       });
     });
   }

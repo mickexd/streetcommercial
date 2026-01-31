@@ -1,0 +1,1629 @@
+---
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import "../../styles/global.css";
+
+// Get all plaza images at build time
+const plazaImages = import.meta.glob("/public/plazas/**/*.{webp,jpg,png,jpeg}", { eager: true });
+
+// Helper function to get all images for a plaza folder
+function getPlazaImages(folderName: string): string[] {
+  const mainImage: string[] = [];
+  const otherImages: string[] = [];
+  const folderPath = `/public/plazas/${folderName}/`;
+  
+  for (const [path, _mod] of Object.entries(plazaImages)) {
+    if (path.includes(folderPath)) {
+      // Convert /public/... to actual URL path
+      const urlPath = path.replace('/public', '');
+      
+      if (path.includes('main.webp')) {
+        mainImage.push(urlPath);
+      } else {
+        otherImages.push(urlPath);
+      }
+    }
+  }
+  
+  // Sort other images to ensure consistent order (plaza-1, plaza-2, etc.)
+  otherImages.sort((a, b) => {
+    const numA = parseInt(a.match(/plaza-(\d+)/)?.[1] || '0');
+    const numB = parseInt(b.match(/plaza-(\d+)/)?.[1] || '0');
+    return numA - numB;
+  });
+  
+  // Return main image first, followed by other images
+  return [...mainImage, ...otherImages];
+}
+
+export async function getStaticPaths() {
+  const projects = [
+    {
+      id: "avante",
+      slug: "avante-street",
+      name: "Avante Street",
+      folder: "Avante Street",
+      category: "Comercial",
+      location: "Capital Norte, Zapopan",
+      status: "Preventa fase 1",
+      units: "51 locales",
+      priceRange: "$1.58 – $5.4 MDP",
+      roi: "9% – 11% anual neto",
+      pitch:
+        "Plaza de 3 niveles con drive-thru + roof pádel, diseñada para capturar la demanda real generada por el Hospital Santa María Chapalita.",
+      usp: [
+        "Drive-thru como atractor de tráfico",
+        "Roof con cancha de pádel",
+        "Demanda >5,000 personas/día",
+      ],
+      image: "/plazas/Avante Street/main.webp",
+      fullDescription:
+        "Plaza de 3 niveles con drive-thru + roof pádel, diseñada para capturar la demanda real generada por el Hospital Santa María Chapalita + la expansión residencial de capital norte.",
+      mix: [
+        "Planta baja: giros esenciales (farmacia, carnicería, cremería, abarrotes)",
+        "Niveles superiores / roof: padel + gym",
+        "Local con drive-thru: comida rápida / autoservicio",
+      ],
+      arguments: [
+        "Demanda real y sostenida por hospital + fraccionamiento nuevo = menor riesgo de vacancia",
+        "Amenidades como palanca comercial: pádel + roof elevan ARPU de locales F&B",
+        "Drive-thru = tráfico inmediato y fácil anclaje para marcas nacionales",
+      ],
+    },
+    {
+      id: "nova",
+      slug: "nova-street",
+      name: "Nova Street",
+      folder: "Nova Street",
+      category: "Comercial",
+      location: "Zona Norte ZMG",
+      status: "Preventa fase 1",
+      units: "42 locales",
+      priceRange: "$1.66 – $10.68 MDP",
+      roi: "~10% anual neto",
+      pitch:
+        "Plaza 3 niveles pensada para una arteria de paso obligado con terrazas; captura flujo vehicular masivo.",
+      usp: [
+        ">30,000 autos/día de tráfico",
+        "Diseño con terrazas premium",
+        "Frente a Cruz Verde Niña Eva",
+      ],
+      image: "/plazas/Nova Street/main.webp",
+      fullDescription:
+        "Plaza 3 niveles pensada para una arteria de paso obligado con terrazas; captura flujo vehicular masivo y demanda de nuevos fraccionamientos.",
+      mix: [
+        "PB: conveniencia y servicios",
+        "Niveles superiores y terrazas: F&B de formato medio/alto",
+        "Enfasis en operadores que rentan por visibilidad",
+      ],
+      arguments: [
+        "Visibilidad y volumen: >30k autos diarios + Cruz Verde frente a plaza",
+        "Arquitectura comercial que mejora ticket: terrazas y diseño premium",
+        "Escalabilidad del valor: plusvalía por expansión del área",
+      ],
+    },
+    {
+      id: "albaterra",
+      slug: "albaterra-street",
+      name: "Albaterra Street",
+      folder: "Albaterra Street",
+      category: "Comercial",
+      location: "Zapopan",
+      status: "En desarrollo",
+      units: "Por definir",
+      priceRange: "Próximamente",
+      roi: "En evaluación",
+      pitch: "Nuevo desarrollo Street en zona estratégica.",
+      usp: [
+        "Ubicación privilegiada",
+        "Desarrollo en planificación",
+        "Más información próximamente",
+      ],
+      image: "/plazas/Albaterra Street/main.webp",
+      fullDescription:
+        "Nuevo desarrollo Street en zona estratégica de Zapopan, actualmente en fase de planificación.",
+      mix: ["Por definir"],
+      arguments: [
+        "Ubicación estratégica en zona de crecimiento",
+        "Respaldo de la marca Street",
+        "Oportunidad en fase inicial",
+      ],
+    },
+    {
+      id: "bosques",
+      slug: "bosques-street",
+      name: "Bosques Street",
+      folder: "Bosques Street",
+      category: "Médico + Comercial",
+      location: "Capital Norte, Zapopan",
+      status: "En construcción",
+      units: "32 locales + 16 unidades médicas",
+      priceRange: "Consultar",
+      roi: "Demanda estructural por salud",
+      pitch:
+        "Plaza + núcleo médico dirigida a capturar la demanda continua por salud en Capital Norte.",
+      usp: [
+        "Núcleo médico especializado",
+        "Consultorios con patio",
+        "Cercanía Hospital Santa María",
+      ],
+      image: "/plazas/Bosques Street/main.webp",
+      fullDescription:
+        "Plaza + núcleo médico dirigida a capturar la demanda continua por salud y servicios en Capital Norte, con inventario optimizado para consultorios.",
+      mix: [
+        "Núcleo médico (consultorios, unidades médicas)",
+        "Conveniencia",
+        "F&B ligero orientado a pacientes",
+      ],
+      arguments: [
+        "Demanda estructural: salud no se sustituye",
+        "Producto adaptado: configuración con unidades médicas",
+        "Riesgo mitigado: mix enfocado en salud",
+      ],
+    },
+    {
+      id: "sendas",
+      slug: "sendas-street",
+      name: "Sendas Street",
+      folder: "Sendas Street",
+      category: "Vecinal",
+      location: "Tlajomulco, Senderos de Monteverde",
+      status: "Venta avanzada",
+      units: "~35 locales",
+      priceRange: "Desde ~$1.4 MDP",
+      roi: "Riesgo operativo bajo",
+      pitch:
+        "Primera plaza funcional para una comunidad en fuerte crecimiento.",
+      usp: [
+        "Anclas: OXXO, Crossfit, Wingman",
+        "Cancha de pádel en roof",
+        "Única plaza formal en la zona",
+      ],
+      image: "/plazas/Sendas Street/main.webp",
+      fullDescription:
+        "Primera plaza funcional para una comunidad en fuerte crecimiento (única plaza de su tipo dentro de senderos de Monteverde): diseñado para servicios esenciales con anclas inmediatas.",
+      mix: [
+        "Servicios esenciales: abarrotes, farmacia, gimnasios",
+        "F&B de cercanía",
+        "Servicios personales",
+      ],
+      arguments: [
+        "Ventaja de primer jugador en comunidad en expansión",
+        "Anclas ya aseguradas que garantizan tráfico",
+        "Riesgo operativo bajo por enfoque en servicios esenciales",
+      ],
+    },
+    {
+      id: "real",
+      slug: "real-street",
+      name: "Real Street",
+      folder: "Real street",
+      category: "Cercanía",
+      location: "Zapopan Norte, Campo Real",
+      status: "Recién entregada",
+      units: "11 locales",
+      priceRange: "Desde ~$1.2 MDP",
+      roi: "~10% anual neto inicial",
+      pitch:
+        "Plaza de cercanía con entrada/salida obligada del fraccionamiento.",
+      usp: [
+        "Tráfico garantizado por hábito",
+        "Roof con potencial premium",
+        "Solo 2 locales disponibles",
+      ],
+      image: "/plazas/Real street/main.webp",
+      fullDescription:
+        "Plaza de cercanía con entrada/salida obligada del fraccionamiento y roof como diferencial para renta premium.",
+      mix: [
+        "Giros de conveniencia en PB",
+        "Roof orientado a F&B de formato medio/alto o eventos",
+      ],
+      arguments: [
+        "Tráfico por hábito: mínimo esfuerzo comercial",
+        "Activos escasos: solo 2 locales disponibles",
+        "Posibilidad de premiumización del roof",
+      ],
+    },
+    {
+      id: "terrazas",
+      slug: "las-terrazas-street",
+      name: "Las Terrazas Street",
+      folder: "Terrazas street",
+      category: "Comercial",
+      location: "Tlaquepaque",
+      status: "Operando",
+      units: "19 locales",
+      priceRange: "100% vendida",
+      roi: "Track record probado",
+      pitch:
+        "Primera plaza Street, 100% vendida y caso operativo para validar modelo.",
+      usp: [
+        "Primer activo Street entregado",
+        "Evidencia de ejecución",
+        "Data operativa disponible",
+      ],
+      image: "/plazas/Terrazas street/main.webp",
+      fullDescription:
+        "Primera plaza Street, 100% vendida y caso operativo para validar modelo de producto y ejecución.",
+      mix: ["Mezcla tradicional de conveniencia", "F&B"],
+      arguments: [
+        "Evidencia de ejecución para comunicar confianza",
+        "100% vendida: argumento de escasez",
+        "Data operativa disponible para presentar KPIs",
+      ],
+    },
+    {
+      id: "universitaria",
+      slug: "street-universitaria",
+      name: "Street Universitaria",
+      folder: "Universidad Street",
+      category: "Comercial",
+      location: "Tlaquepaque, zona ITESO",
+      status: "Recién entregada",
+      units: "100% vendida y rentada",
+      priceRange: "Consultar",
+      roi: "9% – 10%",
+      pitch:
+        "Plaza orientada a demanda estable por estudiantes y colonias densas.",
+      usp: [
+        "Demanda predecible estudiantil",
+        "Conectividad con ITESO",
+        "100% rentada",
+      ],
+      image: "/plazas/Universidad Street/main.webp",
+      fullDescription:
+        "Plaza orientada a demanda estable por estudiantes y colonias densas; posicionamiento de conveniencia y oferta de bajo ticket.",
+      mix: ["F&B económico", "Servicios escolares", "Tiendas de conveniencia"],
+      arguments: [
+        "Demanda predecible por estudiantes = occupancy estable",
+        "Ubicación estratégica: conectividad con campus",
+        "Modelo comprobado con ROI competitivo",
+      ],
+    },
+    {
+      id: "capital",
+      slug: "capital-street",
+      name: "Capital Street",
+      folder: "Capital Street",
+      category: "Comercial",
+      location: "Capital Norte",
+      status: "Operando",
+      units: "100% vendida y rentada",
+      priceRange: "Caso de éxito",
+      roi: "Validación de modelo",
+      pitch:
+        "Caso de éxito: plaza 100% vendida y 100% rentada que valida la ejecución.",
+      usp: [
+        "Ocupación plena demostrada",
+        "Benchmark para nuevos proyectos",
+        "Cercanía con Avante y Bosques",
+      ],
+      image: "/plazas/Capital Street/main.webp",
+      fullDescription:
+        "Caso de éxito: plaza 100% vendida y 100% rentada que valida la ejecución y la propuesta de valor de Street.",
+      mix: ["Referencia y comparativo para nuevos lanzamientos"],
+      arguments: [
+        "Validación de ejecución: Street entrega y hace rentable",
+        "Caso comercial: material para ventas",
+        "Confianza para inversionistas: histórico reproducible",
+      ],
+    },
+    {
+      id: "elarc",
+      slug: "elarc-street",
+      name: "Elarc Street",
+      folder: "Bosques Street",
+      category: "Mixto",
+      location: "Zona Poniente, Parque Metropolitano",
+      status: "Fase 1 – Entrega 2028",
+      units: "20 locales",
+      priceRange: "Próximamente",
+      roi: "Colaboración LODELA",
+      pitch:
+        "Proyecto mixto con LODELA: torre de departamentos con plaza comercial Street.",
+      usp: [
+        "Colaboración LODELA",
+        "Zona Poniente emergente",
+        "Modelo mixto innovador",
+      ],
+      image: "/plazas/Bosques Street/plaza-1.webp",
+      fullDescription:
+        "Proyecto mixto con LODELA: torre de departamentos con plaza comercial Street ubicado cercano al Parque Metropolitano.",
+      mix: ["Comercial en planta baja", "Residencial en niveles superiores"],
+      arguments: [
+        "Colaboración estratégica con LODELA",
+        "Ubicación en zona poniente de alta plusvalía",
+        "Sinergia entre residentes y locales comerciales",
+      ],
+    },
+    {
+      id: "zimalta",
+      slug: "zimalta-street",
+      name: "Zimaltá Street",
+      folder: "Nova Street",
+      category: "Comercial",
+      location: "Próximamente",
+      status: "En planeación",
+      units: "Por definir",
+      priceRange: "Próximamente",
+      roi: "En evaluación",
+      pitch: "Nuevo desarrollo Street en zona estratégica.",
+      usp: [
+        "Nueva ubicación estratégica",
+        "En desarrollo",
+        "Más información próximamente",
+      ],
+      image: "/plazas/Nova Street/plaza-1.webp",
+      fullDescription:
+        "Nuevo desarrollo Street en zona estratégica, actualmente en fase de planeación.",
+      mix: ["Por definir"],
+      arguments: [
+        "Ubicación estratégica",
+        "Oportunidad en fase inicial",
+        "Respaldo de la marca Street",
+      ],
+    },
+  ];
+
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+
+// Get all images for this plaza
+const carouselImages = getPlazaImages(project.folder);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/webp" href="/logo-simple.webp" />
+    <title>{project.name} | STREET Inteligencia Comercial</title>
+    <meta name="description" content={project.pitch} />
+  </head>
+  <body>
+    <Navbar />
+
+    <main class="project-detail-page">
+      <!-- Hero Section -->
+      <section class="project-hero">
+        <div class="hero-backdrop"></div>
+        <div class="hero-container">
+          <div class="hero-content">
+            <div class="content-wrapper">
+              <span class="project-category">{project.category}</span>
+              <h1 class="project-title">{project.name}</h1>
+              <div class="location-badge">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                  ></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span>{project.location}</span>
+              </div>
+              <p class="project-pitch">{project.pitch}</p>
+              <div class="hero-cta-group">
+                <button class="cta-primary" id="open-contact-modal">
+                  <span>Solicitar información</span>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                  </svg>
+                </button>
+                <a href="/proyectos" class="cta-secondary">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M19 12H5M12 19l-7-7 7-7"></path>
+                  </svg>
+                  <span>Ver todos los proyectos</span>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="image-frame">
+              <div class="carousel-container" data-images={JSON.stringify(carouselImages)}>
+                <div class="carousel-track">
+                  {carouselImages.length > 0 ? (
+                    carouselImages.map((img, index) => (
+                      <div class="carousel-slide" data-index={index}>
+                        <img
+                          src={img}
+                          alt={`${project.name} - Imagen ${index + 1}`}
+                          loading={index === 0 ? "eager" : "lazy"}
+                        />
+                      </div>
+                    ))
+                  ) : (
+                    <div class="carousel-slide active">
+                      <img
+                        src={project.image}
+                        alt={project.name}
+                        onerror="this.src='/images/prev-1.webp'"
+                      />
+                    </div>
+                  )}
+                </div>
+                <div class="image-overlay"></div>
+                
+                <!-- Carousel Controls -->
+                {carouselImages.length > 1 && (
+                  <>
+                    <button class="carousel-btn carousel-prev" aria-label="Imagen anterior">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"/>
+                      </svg>
+                    </button>
+                    <button class="carousel-btn carousel-next" aria-label="Imagen siguiente">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                      </svg>
+                    </button>
+                    
+                    <!-- Carousel Indicators -->
+                    <div class="carousel-indicators">
+                      {carouselImages.map((_, index) => (
+                        <button
+                          class="carousel-dot"
+                          data-index={index}
+                          aria-label={`Ir a imagen ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+              <!-- Status badge for desktop - inside image frame -->
+              <div
+                class="status-badge status-badge-desktop"
+                data-status={project.status.toLowerCase()}
+              >
+                <span class="status-dot"></span>
+                {project.status}
+              </div>
+            </div>
+            <!-- Status badge for mobile - outside image frame -->
+            <div
+              class="status-badge status-badge-mobile"
+              data-status={project.status.toLowerCase()}
+            >
+              <span class="status-dot"></span>
+              {project.status}
+            </div>
+            <!-- Stats moved outside image-frame -->
+            <div class="stats-container">
+              <div class="stat-item">
+                <span class="stat-value">{project.units}</span>
+                <span class="stat-label">Unidades</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <span class="stat-value">{project.roi}</span>
+                <span class="stat-label">ROI Estimado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-indicator">
+          <div class="scroll-line"></div>
+        </div>
+      </section>
+
+      <!-- Project Details Section -->
+      <section class="project-details">
+        <div class="details-container">
+          <!-- About Section -->
+          <div class="detail-block about-block">
+            <div class="block-header">
+              <span class="block-number">01</span>
+              <h2 class="block-title">Sobre el proyecto</h2>
+            </div>
+            <div class="block-content">
+              <p class="lead-text">{project.fullDescription}</p>
+            </div>
+          </div>
+
+          <!-- Mix Section -->
+          <div class="detail-block mix-block">
+            <div class="block-header">
+              <span class="block-number">02</span>
+              <h2 class="block-title">Mix Comercial</h2>
+            </div>
+            <div class="block-content">
+              <div class="mix-grid">
+                {
+                  project.mix.map((item, index) => (
+                    <div class="mix-card">
+                      <div class="mix-icon">
+                        <span class="icon-number">0{index + 1}</span>
+                      </div>
+                      <p>{item}</p>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+
+          <!-- Investment Arguments Section -->
+          <div class="detail-block arguments-block">
+            <div class="block-header">
+              <span class="block-number">03</span>
+              <h2 class="block-title">¿Por qué invertir?</h2>
+            </div>
+            <div class="block-content">
+              <div class="arguments-list">
+                {
+                  project.arguments.map((arg, index) => (
+                    <div class="argument-item">
+                      <div class="argument-number">
+                        <span>0{index + 1}</span>
+                      </div>
+                      <div class="argument-content">
+                        <p>{arg}</p>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+
+          <!-- USP Section -->
+          <div class="detail-block usp-block">
+            <div class="block-header">
+              <span class="block-number">04</span>
+              <h2 class="block-title">Ventajas competitivas</h2>
+            </div>
+            <div class="block-content">
+              <div class="usp-grid">
+                {
+                  project.usp.map((item) => (
+                    <div class="usp-card">
+                      <div class="usp-icon">
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      </div>
+                      <span>{item}</span>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="project-cta-section">
+        <div class="cta-container">
+          <div class="cta-content">
+            <span class="cta-label">¿Interesado en este proyecto?</span>
+            <h2 class="cta-title">Hablemos de tu inversión</h2>
+            <p class="cta-subtitle">
+              Déjanos tus datos y un asesor especializado se pondrá en contacto
+              contigo para brindarte toda la información que necesitas.
+            </p>
+            <button class="cta-button" id="open-contact-modal-bottom">
+              <span>Solicitar información</span>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="cta-visual">
+            <div class="cta-pattern"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+
+    <script>
+      // Modal functionality
+      const openModalBtns = document.querySelectorAll(
+        "#open-contact-modal, #open-contact-modal-bottom",
+      );
+
+      openModalBtns.forEach((btn) => {
+        btn?.addEventListener("click", () => {
+          document.dispatchEvent(new CustomEvent("open-contact-modal"));
+        });
+      });
+
+      // Carousel functionality
+      const carouselContainer = document.querySelector('.carousel-container');
+      if (carouselContainer) {
+        const track = carouselContainer.querySelector('.carousel-track');
+        const slides = carouselContainer.querySelectorAll('.carousel-slide');
+        const prevBtn = carouselContainer.querySelector('.carousel-prev');
+        const nextBtn = carouselContainer.querySelector('.carousel-next');
+        const dots = carouselContainer.querySelectorAll('.carousel-dot');
+        
+        if (slides.length > 1) {
+          let currentIndex = 0;
+          let autoplayInterval: ReturnType<typeof setInterval> | null = null;
+          
+          function showSlide(index: number) {
+            // Handle wrapping
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+            
+            currentIndex = index;
+            
+            // Update slides
+            slides.forEach((slide, i) => {
+              slide.classList.toggle('active', i === currentIndex);
+            });
+            
+            // Update dots
+            dots.forEach((dot, i) => {
+              dot.classList.toggle('active', i === currentIndex);
+            });
+            
+            // Move track
+            if (track) {
+              (track as HTMLElement).style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
+          }
+          
+          function nextSlide() {
+            showSlide(currentIndex + 1);
+          }
+          
+          function prevSlide() {
+            showSlide(currentIndex - 1);
+          }
+          
+          function startAutoplay() {
+            if (autoplayInterval) clearInterval(autoplayInterval);
+            autoplayInterval = setInterval(nextSlide, 4000); // Change every 4 seconds
+          }
+          
+          function stopAutoplay() {
+            if (autoplayInterval) {
+              clearInterval(autoplayInterval);
+              autoplayInterval = null;
+            }
+          }
+          
+          // Initialize
+          showSlide(0);
+          startAutoplay();
+          
+          // Event listeners
+          prevBtn?.addEventListener('click', () => {
+            prevSlide();
+            stopAutoplay();
+            startAutoplay();
+          });
+          
+          nextBtn?.addEventListener('click', () => {
+            nextSlide();
+            stopAutoplay();
+            startAutoplay();
+          });
+          
+          dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+              showSlide(index);
+              stopAutoplay();
+              startAutoplay();
+            });
+          });
+          
+          // Pause on hover
+          carouselContainer.addEventListener('mouseenter', stopAutoplay);
+          carouselContainer.addEventListener('mouseleave', startAutoplay);
+        }
+      }
+
+      // Scroll animations
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".detail-block").forEach((block) => {
+        observer.observe(block);
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  :root {
+    --color-dark: #15152a;
+    --color-cream: #f7efe6;
+    --color-cream-light: #f0e6db;
+    --color-yellow: #fcc419;
+    --color-gold: #d4a838;
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .project-detail-page {
+    background-color: var(--color-cream);
+    min-height: 100vh;
+  }
+
+  /* Hero Section */
+  .project-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 5vw 80px;
+    overflow: hidden;
+    background-color: var(--color-cream);
+  }
+
+  .hero-backdrop {
+    position: absolute;
+    inset: 0;
+    background: var(--color-cream);
+    opacity: 1;
+  }
+
+  .hero-container {
+    position: relative;
+    max-width: 1600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 6rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-content {
+    color: var(--color-dark);
+  }
+
+  .content-wrapper {
+    max-width: 600px;
+  }
+
+  .project-category {
+    display: inline-block;
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--color-dark);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(21, 21, 42, 0.2);
+    border-radius: 100px;
+    background: rgba(252, 196, 25, 0.1);
+  }
+
+  .project-title {
+    font-family: "Monument Extended", sans-serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 0.9;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    color: var(--color-dark);
+    letter-spacing: -0.04em;
+  }
+
+  .location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 1rem;
+    color: rgba(21, 21, 42, 0.7);
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(21, 21, 42, 0.1);
+  }
+
+  .project-pitch {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: rgba(21, 21, 42, 0.85);
+    margin-bottom: 3rem;
+    max-width: 550px;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 2.5rem;
+    background: var(--color-dark);
+    color: var(--color-cream);
+    font-family: "Monument Extended", sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.4s var(--transition-expo);
+    text-decoration: none;
+  }
+
+  .cta-primary:hover {
+    transform: translateY(-3px);
+    background: var(--color-yellow);
+    color: var(--color-dark);
+    box-shadow: 0 10px 30px rgba(21, 21, 42, 0.2);
+  }
+
+  .cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 2rem;
+    background: transparent;
+    color: var(--color-dark);
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 0.85rem;
+    border: 1px solid rgba(21, 21, 42, 0.3);
+    border-radius: 100px;
+    text-decoration: none;
+    transition: all 0.4s var(--transition-expo);
+  }
+
+  .cta-secondary:hover {
+    background: var(--color-dark);
+    border-color: var(--color-dark);
+    color: var(--color-cream);
+  }
+
+  /* Hero Visual */
+  .hero-visual {
+    position: relative;
+  }
+
+  .image-frame {
+    position: relative;
+    border-radius: 8px; /* Reduced from 24px */
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Carousel Styles */
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s var(--transition-expo);
+  }
+
+  .carousel-slide {
+    flex: 0 0 100%;
+    min-width: 100%;
+    position: relative;
+    aspect-ratio: 4/3;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: rgba(21, 21, 42, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(252, 196, 25, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-cream);
+    transition: all 0.3s var(--transition-smooth);
+    z-index: 10;
+    opacity: 0;
+  }
+
+  .image-frame:hover .carousel-btn {
+    opacity: 1;
+  }
+
+  .carousel-btn:hover {
+    background: var(--color-yellow);
+    color: var(--color-dark);
+    border-color: var(--color-yellow);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .carousel-prev {
+    left: 1rem;
+  }
+
+  .carousel-next {
+    right: 1rem;
+  }
+
+  .carousel-indicators {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(247, 239, 230, 0.5);
+    cursor: pointer;
+    transition: all 0.3s var(--transition-smooth);
+    padding: 0;
+  }
+
+  .carousel-dot.active {
+    background: var(--color-yellow);
+    transform: scale(1.3);
+  }
+
+  .carousel-dot:hover {
+    background: var(--color-cream);
+  }
+
+  .image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(21, 21, 42, 0.6) 0%,
+      transparent 50%
+    );
+    pointer-events: none;
+  }
+
+  .status-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: var(--color-dark);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(252, 196, 25, 0.5);
+    color: var(--color-cream);
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 100px;
+    z-index: 10;
+  }
+
+  .status-badge-desktop {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+  }
+
+  .status-badge-mobile {
+    display: none;
+    margin: 1rem auto 0;
+    width: fit-content;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--color-yellow);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .stats-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1.5rem 3rem;
+    background: var(--color-dark);
+    border-radius: 100px;
+    box-shadow: 0 20px 40px rgba(21, 21, 42, 0.15);
+    margin-top: 2rem;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-value {
+    display: block;
+    font-family: "Monument Extended", sans-serif;
+    font-size: 0.9rem;
+    color: var(--color-cream);
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 0.7rem;
+    color: rgba(247, 239, 230, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(247, 239, 230, 0.2);
+  }
+
+  .scroll-indicator {
+    display: none;
+  }
+
+  @keyframes scrollLine {
+    0% {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    50% {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+    51% {
+      transform-origin: bottom;
+    }
+    100% {
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+  }
+
+  /* Project Details Section */
+  .project-details {
+    padding: 10vh 5vw;
+    background: var(--color-cream);
+  }
+
+  .details-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .detail-block {
+    margin-bottom: 8rem;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s var(--transition-expo);
+  }
+
+  .detail-block.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .block-header {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(21, 21, 42, 0.15);
+  }
+
+  .block-number {
+    font-family: "Monument Extended", sans-serif;
+    font-size: 0.85rem;
+    color: var(--color-yellow);
+    font-weight: 600;
+    background: var(--color-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+  }
+
+  .block-title {
+    font-family: "Monument Extended", sans-serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: var(--color-dark);
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+
+  /* About Block */
+  .lead-text {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    line-height: 1.7;
+    color: var(--color-dark);
+    max-width: 900px;
+    font-weight: 500;
+  }
+
+  /* Mix Block */
+  .mix-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .mix-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: var(--color-cream-light);
+    border: 1px solid rgba(21, 21, 42, 0.08);
+    border-radius: 16px;
+    transition: all 0.4s var(--transition-smooth);
+  }
+
+  .mix-card:hover {
+    background: var(--color-dark);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(21, 21, 42, 0.1);
+  }
+
+  .mix-card:hover p {
+    color: var(--color-cream);
+  }
+
+  .mix-card:hover .mix-icon {
+    background: var(--color-yellow);
+  }
+
+  .mix-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-dark);
+    border-radius: 12px;
+    transition: all 0.4s var(--transition-smooth);
+  }
+
+  .icon-number {
+    font-family: "Monument Extended", sans-serif;
+    font-size: 0.9rem;
+    color: var(--color-cream);
+    font-weight: 600;
+  }
+
+  .mix-card:hover .icon-number {
+    color: var(--color-dark);
+  }
+
+  .mix-card p {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-dark);
+    margin: 0;
+    transition: color 0.4s var(--transition-smooth);
+  }
+
+  /* Arguments Block */
+  .arguments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .argument-item {
+    display: flex;
+    gap: 2rem;
+    padding: 2.5rem;
+    background: var(--color-cream-light);
+    border: 1px solid rgba(21, 21, 42, 0.1);
+    border-radius: 20px;
+    transition: all 0.4s var(--transition-smooth);
+  }
+
+  .argument-item:hover {
+    transform: translateX(10px);
+    background: var(--color-dark);
+    box-shadow: 0 20px 40px rgba(21, 21, 42, 0.1);
+  }
+
+  .argument-item:hover .argument-content p {
+    color: var(--color-cream);
+  }
+
+  .argument-number {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-yellow);
+    border-radius: 50%;
+  }
+
+  .argument-number span {
+    font-family: "Monument Extended", sans-serif;
+    font-size: 1.1rem;
+    color: var(--color-dark);
+    font-weight: 600;
+  }
+
+  .argument-content p {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: var(--color-dark);
+    margin: 0;
+    font-weight: 500;
+    transition: color 0.4s var(--transition-smooth);
+  }
+
+  /* USP Block */
+  .usp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .usp-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    background: var(--color-cream-light);
+    border: 1px solid rgba(21, 21, 42, 0.08);
+    border-radius: 100px;
+    transition: all 0.4s var(--transition-smooth);
+  }
+
+  .usp-card:hover {
+    background: var(--color-dark);
+    border-color: var(--color-dark);
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(21, 21, 42, 0.1);
+  }
+
+  .usp-card:hover span {
+    color: var(--color-cream);
+  }
+
+  .usp-card:hover .usp-icon {
+    background: var(--color-yellow);
+    color: var(--color-dark);
+  }
+
+  .usp-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-dark);
+    border-radius: 50%;
+    color: var(--color-cream);
+    transition: all 0.4s var(--transition-smooth);
+  }
+
+  .usp-card span {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 1rem;
+    color: var(--color-dark);
+    font-weight: 500;
+    transition: color 0.4s var(--transition-smooth);
+  }
+
+  /* CTA Section */
+  .project-cta-section {
+    padding: 10vh 5vw;
+    background: var(--color-cream);
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(21, 21, 42, 0.1);
+  }
+
+  .cta-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .cta-content {
+    color: var(--color-dark);
+  }
+
+  .cta-label {
+    display: block;
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--color-dark);
+    opacity: 0.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-title {
+    font-family: "Monument Extended", sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    color: var(--color-dark);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+
+  .cta-subtitle {
+    font-family: "Neue Montreal", sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: rgba(21, 21, 42, 0.75);
+    margin-bottom: 2.5rem;
+    max-width: 500px;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem 3rem;
+    background: var(--color-dark);
+    color: var(--color-cream);
+    font-family: "Monument Extended", sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.4s var(--transition-expo);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-3px);
+    background: var(--color-yellow);
+    color: var(--color-dark);
+    box-shadow: 0 15px 40px rgba(21, 21, 42, 0.15);
+  }
+
+  .cta-visual {
+    position: relative;
+    height: 300px;
+  }
+
+  .cta-pattern {
+    position: absolute;
+    inset: 0;
+    background: var(--color-cream-light);
+    border-radius: 8px; /* Reduced from 24px to match */
+    border: 1px solid rgba(21, 21, 42, 0.1);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hero-container {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+      text-align: center;
+    }
+
+    .content-wrapper {
+      max-width: 100%;
+    }
+
+    .hero-cta-group {
+      justify-content: center;
+    }
+
+    .hero-visual {
+      order: -1;
+    }
+
+    .carousel-slide {
+      aspect-ratio: 16/9;
+    }
+
+    .carousel-btn {
+      opacity: 1;
+      width: 40px;
+      height: 40px;
+    }
+
+    .carousel-prev {
+      left: 0.5rem;
+    }
+
+    .carousel-next {
+      right: 0.5rem;
+    }
+
+    .stats-container {
+      margin-top: 1.5rem;
+      padding: 1.25rem 2rem;
+      gap: 1.5rem;
+    }
+
+    .cta-container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .cta-subtitle {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-visual {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .project-hero {
+      padding: 100px 1.5rem 60px;
+    }
+
+    .hero-cta-group {
+      flex-direction: column;
+    }
+
+    .cta-primary,
+    .cta-secondary {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .image-frame {
+      border-radius: 8px;
+      margin-bottom: 0;
+    }
+
+    .status-badge-desktop {
+      display: none;
+    }
+
+    .status-badge-mobile {
+      display: flex;
+    }
+
+    .stats-container {
+      flex-direction: row;
+      gap: 1.25rem;
+      padding: 1.25rem 1.75rem;
+      margin-top: 0;
+      max-width: 95%;
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 30px;
+    }
+
+    .stat-value {
+      font-size: 0.85rem;
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+    }
+
+    .block-header {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .argument-item {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .mix-card {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .carousel-indicators {
+      bottom: 1rem;
+    }
+
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+    }
+  }
+</style>
